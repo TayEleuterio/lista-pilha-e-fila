@@ -7,7 +7,7 @@ Este repositório contém a implementação das atividades propostas relacionada
 * Deque
 * Fila
 
-## Atividades implementadas  
+## 📚 Atividades implementadas  
 
 ### 1. Lista Ligada
 Transformação de uma lista ligada simples em uma lista duplamente ligada, implementando e revisando a função:
@@ -21,3 +21,21 @@ Transformação de uma lista ligada simples em uma lista duplamente ligada, impl
 Implementação da função:
 - `void exibirPilhaInvertida(PILHA* p);`
 
+### Objetivo:
+- Exibir os elementos da pilha de baixo para cima;
+
+### 3. Deque
+Criação da função:
+- `bool encontrarMax(DEQUE* d, int* max);`
+
+### Requisitos:
+- Encontrar o maior valor no deque;
+- Retornar `False` caso o deque esteja vazio.
+
+### 4. Fila com Nó-Cabeça
+Adaptação das funções de inserção e remoção para considerar a existência de um nó-cabeça:
+- `bool inserirNaFila(FILA* f, REGISTRO reg);`
+- `bool excluirDaFila(FILA* f, REGISTRO* reg);`
+
+#### Objetivo:
+- Manter a integridade da fila com a inclusão de um nó-cabeça para facilitar a gestão dos elementos.
