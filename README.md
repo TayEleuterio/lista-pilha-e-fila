@@ -4,7 +4,6 @@ Este repositório contém a implementação das atividades propostas relacionada
 
 * Lista ligada
 * Pilha estática
-* Deque
 * Fila
 
 ## 📚 Atividades implementadas  
@@ -24,15 +23,7 @@ Implementação da função:
 ### Objetivo:
 - Exibir os elementos da pilha de baixo para cima;
 
-### 3. Deque
-Criação da função:
-- `bool encontrarMax(DEQUE* d, int* max);`
-
-### Requisitos:
-- Encontrar o maior valor no deque;
-- Retornar `False` caso o deque esteja vazio.
-
-### 4. Fila com Nó-Cabeça
+### 3. Fila com Nó-Cabeça
 Adaptação das funções de inserção e remoção para considerar a existência de um nó-cabeça:
 - `bool inserirNaFila(FILA* f, REGISTRO reg);`
 - `bool excluirDaFila(FILA* f, REGISTRO* reg);`
