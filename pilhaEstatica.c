@@ -19,11 +19,11 @@ void exibirPilha(PILHA* p) {
 }
 
 void exibirPilhaInvertida(PILHA* p) {
-printf("Pilha (da base para o topo): \" ");
-for (int i = 0; i <= p->topo; i++) {
-    printf("%d ", p->A[i].chave);
-}
-printf("\"\n");
+    printf("Pilha (da base para o topo): \" ");
+    for (int i = 0; i <= p->topo; i++) {
+        printf("%d ", p->A[i].chave);
+    }
+    printf("\"\n");
 } 
 
 int tamanhoEmBytesPilha(PILHA* p) {
