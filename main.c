@@ -33,6 +33,10 @@ void exibir(PILHA* p) {
     exibirPilha(p);
 }
 
+void exibibrInvertida(PILHA* p) {
+    exibirPilhaInvertida(p);
+}
+
 void meuLog(PILHA* p) {
     printf("Numero de elementos na pilha: %i.\n", tamanhoPilha(p));
     printf("Tamanho da pilha (em bytes): %i.\n", tamanhoEmBytesPilha(p));
@@ -43,6 +47,7 @@ void help() {
     printf("   i <chave1>: inserir elemento com chave=chave1 no topo da pilha\n");
     printf("   e : excluir o topo da pilha\n");
     printf("   p : imprimir pilha\n");
+    printf("   s : imprimir pilha invertida\n");
     printf("   d : destruir (zerar) pilha\n");
     printf("   l : exibir log de utilizacao da pilha\n");
     printf("   h : exibir esta mensagem de ajuda\n");
@@ -70,6 +75,9 @@ int main() {
                 break;
             case 'p':
                 exibir(&pilha);
+                break;
+            case 's':
+                exibirInvertida(&pilha);
                 break;
             case 'd':
                 destruir(&pilha);
