@@ -58,11 +58,20 @@ PONT buscaSeqExc(LISTA* l, TIPOCHAVE ch, PONT* ant) {
 }
 
 bool excluirElemLista(LISTA* l, TIPOCHAVE ch) {
-  PONT ant, i;
+  PONT i = l->inicio;
   i = buscaSeqExc(l, ch, &ant);
+  whilw (i !=NULL && i->reg.chave != ch) {
+    i = i->prox;
+  }
   if (i == NULL) return false;
-  if (ant == NULL) l->inicio = i->prox;
-  else ant->prox = i->prox;
+  if (i->ant != NULL) { ant->prox = i->prox
+  }
+  else {
+    l->inicio = i->prox;
+  }
+  if (i->prox != NULL) {
+    i->prox->ant = i->ant;
+  }
   free(i);
   return true;
 }
