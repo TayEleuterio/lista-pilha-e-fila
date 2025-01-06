@@ -18,6 +18,7 @@ typedef struct {
 void inicializarPilha(PILHA* p);
 int tamanhoPilha(PILHA* p);
 void exibirPilha(PILHA* p);
+void exibirPilhaInvertida(PILHA* p)
 int tamanhoEmBytesPilha(PILHA* p);
 int buscaTopoDaPilha(PILHA* p);
 void reinicializarPilha(PILHA* p);
