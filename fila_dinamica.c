@@ -28,7 +28,7 @@ void inicializarFila(FILA* f){
 } 
 
 int tamanho(FILA* f) {
-  PONT end = f->inicio;
+  PONT end = f->inicio->prox;
   int tam = 0;
   while (end != NULL){
     tam++;
@@ -53,8 +53,9 @@ void destruirFila(FILA* f) {
 } 
 
 PONT retornarPrimeiro(FILA* f, TIPOCHAVE *ch){
-  if (f->inicio != NULL) *ch = f->inicio->reg.chave;
-  return f->inicio;
+  if (f->inicio->prox != NULL) 
+    *ch = f->inicio->prox->reg.chave;
+  return f->inicio->prox;
 } 
 
 PONT retornarUltimo(FILA* f, TIPOCHAVE* ch){
@@ -93,7 +94,7 @@ bool excluirDaFila(FILA* f, REGISTRO* reg) {
 } 
 
 void exibirFila(FILA* f){
-  PONT end = f->inicio;
+  PONT end = f->inicio->prox;
   printf("Fila: \" ");
   while (end != NULL){
     printf("%d ", end->reg.chave); 
