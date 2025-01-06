@@ -1,9 +1,3 @@
-/******************************************************************************
-//     filaDinamica.c
-// Este programa gerencia filas lineares ligadas (implementacao dinamica).
-// As filas gerenciadas podem ter um numero arbitrario de elementos.
-// Não usaremos sentinela ou cabeça nesta estrutura.
-******************************************************************************/
 #include <stdio.h>
 #include <malloc.h>
 #define ERRO -1
@@ -27,14 +21,12 @@ typedef struct {
   PONT fim;
 } FILA;
 
-/* Inicialização da fila ligada (a fila jah esta criada e eh apontada 
-pelo endereco em f) */
 void inicializarFila(FILA* f){
-  f->inicio = NULL;
-  f->fim = NULL;
-} /* inicializarFila */
+  f->inicio = (PONT) malloc(sizeof(ELEMENTO));
+  f->inicio->prox = NULL;
+  f->fim = f->inicio;
+} 
 
-/* Retornar o tamanho da fila (numero de elementos) */
 int tamanho(FILA* f) {
   PONT end = f->inicio;
   int tam = 0;
@@ -43,16 +35,12 @@ int tamanho(FILA* f) {
     end = end->prox;
   }
   return tam;
-} /* tamanho */
+} 
 
-/* Retornar o tamanho em bytes da fila. Neste caso, isto depende do numero
-   de elementos que estao sendo usados.   */
 int tamanhoEmBytes(FILA* f) {
   return (tamanho(f)*sizeof(ELEMENTO)) + sizeof(FILA);
-} /* tamanhoEmBytes */
+} 
 
-/* Destruição da fila 
-   libera a memoria de todos os elementos da fila*/
 void destruirFila(FILA* f) {
   PONT end = f->inicio;
   while (end != NULL){
@@ -62,69 +50,58 @@ void destruirFila(FILA* f) {
   }
   f->inicio = NULL;
   f->fim = NULL;
-} /* destruirFila */
+} 
 
-
-/* retornarPrimeiro - retorna o endereco do primeiro elemento da fila e (caso
-   a fila nao esteja vazia) retorna a chave desse elemento na memoria 
-   apontada pelo ponteiro ch */
 PONT retornarPrimeiro(FILA* f, TIPOCHAVE *ch){
   if (f->inicio != NULL) *ch = f->inicio->reg.chave;
   return f->inicio;
-} /* retornarPrimeiro */
+} 
 
-/* retornarUltimo - retorna o endereco do ultimo elemento da fila e (caso
-   a fila nao esteja vazia) retorna a chave desse elemento na memoria 
-   apontada pelo ponteiro ch */
 PONT retornarUltimo(FILA* f, TIPOCHAVE* ch){
   if (f->inicio == NULL) return NULL;
   *ch = f->fim->reg.chave;
   return f->fim;
-} /* retornarUltimo */
+} 
 
-
-/* Inserção no fim da fila */
 bool inserirNaFila(FILA* f,REGISTRO reg) {
   PONT novo = (PONT) malloc(sizeof(ELEMENTO));
+  if (novo == NULL) {
+    return false;
+  }
+  
   novo->reg = reg;
   novo->prox = NULL;
-  if (f->inicio==NULL){
-     f->inicio = novo;
-  }else{
-     f->fim->prox = novo;
-  }
+  
+  f->fim->prox = novo;
   f->fim = novo;
+  
   return true;
-} /* inserir */
+} 
 
-/* Excluir  */
 bool excluirDaFila(FILA* f, REGISTRO* reg) {
-  if (f->inicio==NULL){
-    return false;                     
+  if (f->inicio == NULL) return false;                     
+  
+  PONT apagar = f->inicio->prox;
+  *reg = apagar->reg;
+  f->inicio->prox = apagar->prox;
+  
+  if (f->inicio->prox == NULL){
+    f->fim = f->inicio;
   }
-  *reg = f->inicio->reg;
-  PONT apagar = f->inicio;
-  f->inicio = f->inicio->prox;
   free(apagar);
-  if (f->inicio == NULL){
-    f->fim = NULL;
-  }
   return true;
-} /* excluirDaFila */
+} 
 
-
-/* Exibição da fila sequencial */
 void exibirFila(FILA* f){
   PONT end = f->inicio;
   printf("Fila: \" ");
   while (end != NULL){
-    printf("%d ", end->reg.chave); // soh lembrando TIPOCHAVE = int
+    printf("%d ", end->reg.chave); 
     end = end->prox;
   }
   printf("\"\n");
-} /* exibirFila */ 
+} 
 
-/* Busca sequencial */
 PONT buscaSeq(FILA* f,TIPOCHAVE ch){
   PONT pos = f->inicio;
   while (pos != NULL){
@@ -132,9 +109,8 @@ PONT buscaSeq(FILA* f,TIPOCHAVE ch){
     pos = pos->prox;
   }
   return NULL;
-} /* buscaSeq */
+} 
 
-/* Busca sequencial com sentinela alocado dinamicamente */
 PONT buscaSeqSent1(FILA* f,TIPOCHAVE ch){
   if (!f->inicio) return NULL;
   PONT sentinela = malloc(sizeof(ELEMENTO));
@@ -146,9 +122,8 @@ PONT buscaSeqSent1(FILA* f,TIPOCHAVE ch){
   f->fim->prox = NULL;
   if (pos!=sentinela) return pos;
   return NULL;
-} /* buscaSeqSent1 */
+} 
 
-/* Busca sequencial com sentinela como variavel local */
 PONT buscaSeqSent2(FILA* f,TIPOCHAVE ch){
   if (!f->inicio) return NULL;
   ELEMENTO sentinela;
@@ -159,4 +134,4 @@ PONT buscaSeqSent2(FILA* f,TIPOCHAVE ch){
   f->fim->prox = NULL;
   if (pos!=&sentinela) return pos;
   return NULL;
-} /* buscaSeqSent1 */
+} 
