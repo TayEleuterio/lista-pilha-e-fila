@@ -87,18 +87,40 @@ void reinicializarLista(LISTA* l) {
 }
 
 bool inserirElemListaOrd(LISTA* l, REGISTRO reg) {
-  TIPOCHAVE ch = reg.chave;
-  PONT ant, i;
-  i = buscaSeqExc(l, ch, &ant);
-  if (i != NULL) return false;
-  i = (PONT)malloc(sizeof(ELEMENTO));
-  i->reg = reg;
-  if (ant == NULL) {
-    i->prox = l->inicio;
-    l->inicio = i;
-  } else {
-    i->prox = ant->prox;
-    ant->prox = i;
+  PONT novo = (PONT) malloc(sizeof(ELEMENTO));
+  if (novo == NULL) return false;
+  novo->reg = reg;
+  nov->prox = NULL;
+  novo->ant = NULL;
+
+  PONT atual = l->inicio;
+  PONT anterior = NULL;
+
+  while (atual != NULL && atual->reg.chave == reg.chave) {
+    anterior = atual;
+    atual = atual->prox;
+  }
+  
+  if (atual != NULL && atual->reg.chave == reg.chave) {
+    free(novo);
+    return false;
+  }
+  
+  if (antterior == NULL) {
+    novo->prox = l->inicio;
+    if (l->inicio != NULL) {
+      l->inicio->ant = novo;
+    }
+    l->inicio = novo;
+  } 
+  
+  else {
+    novo->prox = atual;
+    novo->ant = anterior;
+    anterior->prox = novo;
+    if (atual != NULL){
+      atual->ant = novo;
+    }
   }
   return true;
 }
